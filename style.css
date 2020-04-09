@@ -1,0 +1,14 @@
+.titleContainer {
+    background-color: rgb(59, 59, 59);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+.searchContainer {
+    display: inline;
+}
+
+.oneDayContainer {
+    height: 50%;
+    border: 1px solid black;
+}
