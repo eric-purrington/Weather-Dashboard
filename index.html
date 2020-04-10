@@ -6,6 +6,12 @@
     <title>Weather Dashboard</title>
     <link rel = "stylesheet" type = "text/css" href = "reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <link rel = "stylesheet" type = "text/css" href = "style.css">
 </head>
 <body>
@@ -19,43 +25,40 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="City name" id = "newCity" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
                 <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active">
+                    <button type="button" class="list-group-item list-group-item-action active" data-value="">
                       Seattle
                     </button>
-                    <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
-                    <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
-                    <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
-                    <button type="button" class="list-group-item list-group-item-action">Vestibulum at eros</button>
-                  </div>
+                </div>
             </div>
         </div>
         <div class = "col-8">
             <div class = "weatherContainer">
                 <div class = "row">
                     <div class = "oneDayContainer">
-                        <h1 class = "cityName">Seattle (Current Date) (Current Weather Icon)</h1>
-                        <h3 class = "cityTemp">Temperature: F</h3>
-                        <h3 class = "cityHumidity">Humidity: %</h3>
-                        <h3 class = "cityWind">Wind Speed: MPH</h3>
-                        <h3 class = "cityUV">UV Index: <span class = "indexBox"></span></h3>
+                        <h1 class = "cityName"></h1>
+                        <h3 class = "cityTemp"></h3>
+                        <h3 class = "cityHumidity"></h3>
+                        <h3 class = "cityWind"></h3>
+                        <h3 class = "cityUV"><h3 class = "uviColor"></h3></h3>
                     </div>
                 </div>
                 <div class = "row">
                     <h2>5-Day Forecast:</h1>
                     <div class="card-deck">
                         <div class="card">
-                            <h4>Current Date +1</h4>
-                            <i></i>
+                            <div class="card-body">
+                            </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <h5 class="card-title"></h5>
+                                <img class = "card-img" src="">
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
                             </div>
                         </div>
                         <div class="card">
@@ -76,6 +79,7 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type='text/javascript' src='config.js'></script>
     <script type='text/javascript' src="script.js"></script>
 </body>
