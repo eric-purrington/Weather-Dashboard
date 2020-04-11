@@ -6,18 +6,48 @@ var queryURL = "";
 var lat;
 var lon;
 var cardBodies = [$("#cardBody1"), $("#cardBody2"), $("#cardBody3"), $("#cardBody4"), $("#cardBody5")];
+var weather2save = [];
 // Using moment to add the date
-var currentDay = moment().format("L");
+var currentDay = moment().format("l");
 
-getLatandLon();
+if (localStorage.getItem("savedWeather") !== null) {
+    var savedWeather = JSON.parse(localStorage.getItem("savedWeather"));
+    for (var i = 0; i < savedWeather.length; i++) {
+        city = savedWeather[i];
+        createCityBtn();
+    }
+    weather2save = savedWeather;
+    city = savedWeather[savedWeather.length - 1];
+    getLatandLon();
+} else {
+    getLocation();
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            city = "Your Location";
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+            getWeather();
+        }, function (error) {
+            if (error.code == error.PERMISSION_DENIED) {
+                city = "Seattle"
+                createCityBtn();
+                getLatandLon();
+            }
+        });
+    }
+}
 
 $("#button-addon2").on("click", function (event) {
     event.preventDefault();
     if ($("button").hasClass("active")) {
-        $("button").removeClass("active")
+        $("button").removeClass("active");
     }
     city = $("#newCity").val();
-    city = city.charAt(0).toUpperCase() + city.slice(1);
+    weather2save.push(city);
+    localStorage.setItem("savedWeather", JSON.stringify(weather2save));
     createCityBtn();
     getLatandLon();
 });
@@ -30,6 +60,7 @@ function createCityBtn() {
     newCityBtn.text(city);
     $(".list-group").append(newCityBtn);
 }
+
 function getLatandLon() {
     queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
@@ -45,25 +76,34 @@ function getLatandLon() {
 
 function existingCityBtn() {
     if ($("button").hasClass("active")) {
-        $("button").removeClass("active")
+        $("button").removeClass("active");
     }
     city = $(this).text();
     $(this).addClass("active");
     
-    getWeather();
+    getLatandLon();
 }
 
 function getWeather() {
     $(".empty").empty();
-    $(".uviColor").attr("id", "");
     queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIKey
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-
     // Current Weather
+    getCurrentWeather(response);
+    
+    // UVIndex Color
+    getuviColor(response.current.uvi);
+        
+    // Forecast
+    getForecast(response);
+    });
+}
+
+function getCurrentWeather(response) {
     var iconImg = $("<img>");
     iconImg.attr("src", "http://openweathermap.org/img/w/" + response.current.weather[0].icon + ".png");
     iconImg.attr("alt", "Weather Icon");
@@ -74,13 +114,12 @@ function getWeather() {
     $(".cityWind").text("Wind Speed: " + response.current.wind_speed + " MPH");
     $(".cityUV").text("UV Index : ");
     $(".uviColor").text(response.current.uvi);
-        
-    getuviColor(response.current.uvi);
-        
-    // Forecast
+}
+
+function getForecast(response) {
     for (var i = 0; i < cardBodies.length; i++) {
-        var day = moment().add(i + 1, "days").format("L");
-        var cardTitle = $("<h6>");
+        var day = moment().add(i + 1, "days").format("l");
+        var cardTitle = $("<h5>");
         var cardImg = $("<img>");
         var cardP1 = $("<p>");
         var cardP2 = $("<p>");
@@ -94,8 +133,7 @@ function getWeather() {
         cardP1.text("Temp: " + response.daily[i].temp.day + "\xB0 F");
         cardP2.text("Humidity: " + response.daily[i].humidity + "%");
         cardBodies[i].append(cardTitle, cardImg, cardP1, cardP2);
-    } 
-    });
+    }
 }
 
 function getuviColor(uvi) {

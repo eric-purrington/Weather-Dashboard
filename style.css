@@ -4,13 +4,22 @@
     text-align: center;
     padding: 10px;
 }
+.searchContainer {
+    background-color: rgb(238, 238, 238);
+    padding: 20px;
+}
 
+.btn {
+    color: white;
+    background-color: #007bff;
+    margin-right: 50px;
+}
 .weatherContainer, .oneDayContainer{
     width: 100%;
 }
 .oneDayContainer {
     height: 300px;
-    border: 1px solid black;
+    border: 1px solid rgb(238, 238, 238);
 }
 .uviColor, .cityUV{
     display: inline;
@@ -42,4 +51,21 @@
 }
 .cityUV {
     margin-left: 20px;
+}
+h3 {
+    margin: 20px 500px 20px 0px;
+    float: left;
+}
+.uviColor {
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+}
+.card-body {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+#cityBtn, .cityName {
+    text-transform: capitalize;
 }
