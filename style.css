@@ -4,11 +4,42 @@
     text-align: center;
     padding: 10px;
 }
-.searchContainer {
+
+.weatherContainer, .oneDayContainer{
+    width: 100%;
+}
+.oneDayContainer {
+    height: 300px;
+    border: 1px solid black;
+}
+.uviColor, .cityUV{
     display: inline;
 }
+#uviLow {
+    background-color: yellow;
+}
 
-.oneDayContainer {
-    height: 50%;
-    border: 1px solid black;
+#uviModerate {
+    background-color: orange;
+}
+
+#uviHigh {
+    background-color: orangered;
+}
+
+#uviVeryHigh {
+    background-color: red;
+}
+
+#uviExtreme {
+    background-color: violet;
+}
+.cityName, .cityTemp, .cityHumidity, .cityWind {
+    margin: 20px 20px;
+}
+.cityUV, .uviColor {
+    margin: 20px 0px 40px 0px;
+}
+.cityUV {
+    margin-left: 20px;
 }
