@@ -1,15 +1,18 @@
 // Your apikey here
 var APIKey = config.My_Weather_Key;
 
-var city = "Seattle"
+// initializing with some blank global variables as well as an array holding the card bodies
+var city = ""
 var queryURL = "";
 var lat;
 var lon;
-var cardBodies = [$("#cardBody1"), $("#cardBody2"), $("#cardBody3"), $("#cardBody4"), $("#cardBody5")];
 var weather2save = [];
+var cardBodies = [$("#cardBody1"), $("#cardBody2"), $("#cardBody3"), $("#cardBody4"), $("#cardBody5")];
+
 // Using moment to add the date
 var currentDay = moment().format("l");
 
+// Fetches any saved data and creates buttons for those cities; or asks for current location to give a starter city
 if (localStorage.getItem("savedWeather") !== null) {
     var savedWeather = JSON.parse(localStorage.getItem("savedWeather"));
     for (var i = 0; i < savedWeather.length; i++) {
@@ -18,11 +21,15 @@ if (localStorage.getItem("savedWeather") !== null) {
     }
     weather2save = savedWeather;
     city = savedWeather[savedWeather.length - 1];
+    if ($("button").hasClass("active")) {
+        $("button").removeClass("active");
+    }
     getLatandLon();
 } else {
     getLocation();
 }
 
+// Gets your location and gives the weather for it if allowed; if not allowed sets current city as Seattle
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -40,6 +47,7 @@ function getLocation() {
     }
 }
 
+// On search button click remove active class, makes new button, and saves that city to local storage
 $("#button-addon2").on("click", function (event) {
     event.preventDefault();
     if ($("button").hasClass("active")) {
@@ -52,6 +60,7 @@ $("#button-addon2").on("click", function (event) {
     getLatandLon();
 });
 
+// Function to create new button
 function createCityBtn() {
     var newCityBtn = $("<button>");
     newCityBtn.attr("type", "button");
@@ -61,6 +70,19 @@ function createCityBtn() {
     $(".list-group").append(newCityBtn);
 }
 
+// If existing city button is clicked, will set that button's class to active and remove active from any other button
+function existingCityBtn() {
+    if ($("button").hasClass("active")) {
+        $("button").removeClass("active");
+    }
+    city = $(this).text();
+    $(this).addClass("active");
+    
+    // Starts weather string of functions
+    getLatandLon();
+}
+
+// Function to get lat and lon so that we may put those in the "all in one" api call
 function getLatandLon() {
     queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
@@ -74,16 +96,7 @@ function getLatandLon() {
     });
 }
 
-function existingCityBtn() {
-    if ($("button").hasClass("active")) {
-        $("button").removeClass("active");
-    }
-    city = $(this).text();
-    $(this).addClass("active");
-    
-    getLatandLon();
-}
-
+// Does weather api call
 function getWeather() {
     $(".empty").empty();
     queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIKey
@@ -103,10 +116,12 @@ function getWeather() {
     });
 }
 
+// Function for getting current weather of chosen city/your location
 function getCurrentWeather(response) {
     var iconImg = $("<img>");
     iconImg.attr("src", "http://openweathermap.org/img/w/" + response.current.weather[0].icon + ".png");
     iconImg.attr("alt", "Weather Icon");
+
     $(".cityName").text(city + " (" + currentDay + ") ");
     $(".cityName").append(iconImg);
     $(".cityTemp").text("Temperature: " + response.current.temp + " \xB0F");
@@ -116,6 +131,22 @@ function getCurrentWeather(response) {
     $(".uviColor").text(response.current.uvi);
 }
 
+// Function that sets the uv index color depending on danger levels
+function getuviColor(uvi) {
+    if (uvi <= 2.99) {
+        $(".uviColor").attr("id", "uviLow");
+    } else if (3.00 <= uvi && uvi <= 5.99) {
+        $(".uviColor").attr("id", "uviModerate");
+    } else if (6.00 <= uvi && uvi <= 7.99) {
+        $(".uviColor").attr("id", "uviHigh");
+    } else if (8.00 <= uvi && uvi <= 10.99) {
+        $(".uviColor").attr("id", "uviVeryHigh");
+    } else {
+        $(".uviColor").attr("id", "uviExtreme");
+    }
+}
+
+// Function for getting forecast of chosen city/your location
 function getForecast(response) {
     for (var i = 0; i < cardBodies.length; i++) {
         var day = moment().add(i + 1, "days").format("l");
@@ -136,18 +167,5 @@ function getForecast(response) {
     }
 }
 
-function getuviColor(uvi) {
-    if (uvi <= 2.99) {
-        $(".uviColor").attr("id", "uviLow");
-    } else if (3.00 <= uvi && uvi <= 5.99) {
-        $(".uviColor").attr("id", "uviModerate");
-    } else if (6.00 <= uvi && uvi <= 7.99) {
-        $(".uviColor").attr("id", "uviHigh");
-    } else if (8.00 <= uvi && uvi <= 10.99) {
-        $(".uviColor").attr("id", "uviVeryHigh");
-    } else {
-        $(".uviColor").attr("id", "uviExtreme");
-    }
-}
-
+// Makes sure that even if the button was created with js it can be clicked on
 $(document).on("click", "#cityBtn", existingCityBtn);

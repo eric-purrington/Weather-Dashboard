@@ -9,21 +9,17 @@
     padding: 20px;
 }
 
+.oneDayContainer {
+    height: 300px;
+    border: 1px solid rgb(238, 238, 238);
+    width: 100%;
+}
 .btn {
     color: white;
     background-color: #007bff;
     margin-right: 50px;
 }
-.weatherContainer, .oneDayContainer{
-    width: 100%;
-}
-.oneDayContainer {
-    height: 300px;
-    border: 1px solid rgb(238, 238, 238);
-}
-.uviColor, .cityUV{
-    display: inline;
-}
+
 #uviLow {
     background-color: yellow;
 }
@@ -48,19 +44,24 @@
 }
 .cityUV, .uviColor {
     margin: 20px 0px 40px 0px;
+    display: inline;
 }
+
 .cityUV {
     margin-left: 20px;
 }
-h3 {
-    margin: 20px 500px 20px 0px;
-    float: left;
-}
+
 .uviColor {
     padding: 5px;
     color: white;
     border-radius: 5px;
 }
+
+h3 {
+    margin: 20px 500px 20px 0px;
+    float: left;
+}
+
 .card-body {
     background-color: #007bff;
     color: white;

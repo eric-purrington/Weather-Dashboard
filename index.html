@@ -4,21 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+
+    <!-- Style reset to ward off weird browser standards -->
     <link rel = "stylesheet" type = "text/css" href = "reset.css">
+
+    <!-- Bootstrap link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
+    
+    <!-- Font Awesome link for search icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- My stylesheet -->
     <link rel = "stylesheet" type = "text/css" href = "style.css">
+
 </head>
 <body>
+
+    <!-- Header block -->
     <div class="titleContainer">
         <h1>Weather Dashboard</h1>
     </div>
+
+
     <div class = "row">
+
+        <!-- Left hand side column holding city search and city buttons -->
         <div class = "col-3">
             <div class="searchContainer">
                 <h4>Search for a City:</h4>
@@ -29,12 +39,11 @@
                     </div>
                 </div>
                 <div class="list-group">
-                    <!-- <button type="button" class="list-group-item list-group-item-action active" id = "cityBtn">
-                      Seattle
-                    </button> -->
                 </div>
             </div>
         </div>
+
+        <!-- Right hand side holding current weather and forecast -->
         <div class = "col-9">
             <div class = "weatherContainer">
                 <div class = "row">
@@ -75,9 +84,17 @@
             </div>
         </div>
     </div>
+
+    <!-- jQuery script including AJAX-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Moment script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!-- My config script for api code -->
     <script type='text/javascript' src='config.js'></script>
+
+    <!-- My javascript/jQuery script -->
     <script type='text/javascript' src="script.js"></script>
 </body>
 </html>
