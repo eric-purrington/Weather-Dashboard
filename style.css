@@ -1,72 +1,71 @@
+/* Header box */
 .titleContainer {
     background-color: rgb(59, 59, 59);
     color: white;
     text-align: center;
     padding: 10px;
 }
+/* Left hand side container holding search and city buttons */
 .searchContainer {
     background-color: rgb(238, 238, 238);
     padding: 20px;
 }
-
-.oneDayContainer {
-    height: 300px;
-    border: 1px solid rgb(238, 238, 238);
-    width: 100%;
-}
+/* Search button */
 .btn {
     color: white;
     background-color: #007bff;
     margin-right: 50px;
 }
-
-#uviLow {
-    background-color: yellow;
+/* Right hand side container holding current weather data */
+.oneDayContainer {
+    height: 300px;
+    border: 1px solid rgb(238, 238, 238);
+    width: 100%;
+    padding: 20px;
 }
-
-#uviModerate {
-    background-color: orange;
-}
-
-#uviHigh {
-    background-color: orangered;
-}
-
-#uviVeryHigh {
-    background-color: red;
-}
-
-#uviExtreme {
-    background-color: violet;
-}
+/* Current weather data elements */
 .cityName, .cityTemp, .cityHumidity, .cityWind {
-    margin: 20px 20px;
+    margin: 20px 20px 20px 0px;
 }
+/* Capitalizes city name on document */
+#cityBtn, .cityName {
+    text-transform: capitalize;
+}
+/* UV elements */
 .cityUV, .uviColor {
     margin: 20px 0px 40px 0px;
     display: inline;
 }
-
-.cityUV {
-    margin-left: 20px;
-}
-
+/* Specifically the box that surrounds the uv index */
 .uviColor {
     padding: 5px;
     color: white;
     border-radius: 5px;
 }
-
+/* Specifies uv index's box's color */
+#uviLow {
+    background-color: yellow;
+}
+#uviModerate {
+    background-color: orange;
+}
+#uviHigh {
+    background-color: orangered;
+}
+#uviVeryHigh {
+    background-color: red;
+}
+#uviExtreme {
+    background-color: violet;
+}
+/* Forecast Title */
 h3 {
     margin: 20px 500px 20px 0px;
     float: left;
 }
-
+/* Cards that hold the forecast */
 .card-body {
     background-color: #007bff;
     color: white;
     border-radius: 5px;
-}
-#cityBtn, .cityName {
-    text-transform: capitalize;
 }
