@@ -1,4 +1,3 @@
-// Your apikey here
 var APIKey = "ab2bf7c02d1d14b0e599494d46f5984d";
 
 // initializing with some blank global variables as well as an array holding the card bodies
