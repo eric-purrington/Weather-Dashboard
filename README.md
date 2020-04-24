@@ -2,8 +2,6 @@
 Homework 6 -> A dashboard featuring the current weather and a 5 day forecast of a selected city.
 ## Link to the dashboard
 https://eric-purrington.github.io/Weather-Dashboard/
-## NOTE
-API key was hidden with .gitignore file. To recreate type your api key into script.js variable APIKey.
 
 ## Start Page
 ![image](Weather_Dashboard.png)
